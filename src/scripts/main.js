@@ -42,6 +42,10 @@ export const variables_info = [];
 export const study_zones = [];
 export const territorial_mesh = [];
 
+// Object containing a mapping name/size of the various datasets available
+// Will be replaced by the appropriate value at build time:
+const datasets_info = JSON.parse('DATASET_NAME_SIZE');
+
 // This variable contains informations about the current state of the application
 // (id of the selected region, number of selected variables, their names, etc.).
 // It will also references the variables 'map' and 'chart' (once created)
@@ -844,15 +848,14 @@ function getRandomStartingState() {
 */
 function loadData() {
   let progress = 0;
-  // Will be replaced by the appropriate value at build time:
-  const total = 'ZIP_SIZE';
   const text = d3.select('.top-spinner').select('#progress');
   const formatPercent = d3.format('.0%');
-
-  d3.request('data/data.zip')
+  const dataset_name = window.location.search.replace('?', '') || Object.keys(datasets_info).filter(n => datasets_info[n].default)[0];
+  console.log(dataset_name);
+  d3.request(`data_${dataset_name}/data.zip`)
     .responseType('arraybuffer')
     .on('progress', (val) => {
-      const i = d3.interpolate(progress, val.loaded / total);
+      const i = d3.interpolate(progress, val.loaded / datasets_info[dataset_name].size);
       d3.transition().tween('progress', () => (t) => {
         progress = i(t);
         text.text(`Préparation de la page ... ${formatPercent(progress * 0.91)}`);
