@@ -12,7 +12,6 @@ import RadarChart3 from './modules/charts/radar-chart-3v';
 import Similarity1plus from './modules/charts/similarity-1v';
 import createMenu from './modules/menuleft';
 import updateMyCategorySection from './modules/my-category';
-import makeTour from './modules/guide-tour';
 import { makeTopMenu, makeHeaderChart, makeHeaderMapSection } from './modules/menutop';
 import { MapSelect, svg_map, zoomClick } from './modules/map';
 import { color_highlight, MAX_VARIABLES, fixed_dimension } from './modules/options';
@@ -1028,10 +1027,6 @@ function loadData() {
                   processEscapes: true,
                 },
               });
-              d3.select('#tour_link')
-                .on('click', () => {
-                  makeTour().start();
-                });
             }, 15);
           });
       }, 15);
