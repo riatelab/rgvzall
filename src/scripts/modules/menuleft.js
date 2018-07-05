@@ -105,13 +105,14 @@ const makeButtonTour = () => {
   i.style.paddingTop = '10px';
   d.id = 'tour_link';
   d.style.cursor = 'pointer';
-  d.style.marginLeft = '400px';
   d.style.position = 'absolute';
+  d.style.right = '10px';
+  d.style.top = '-50px';
   d.onclick = function () {
     makeTour().start();
   };
   d.appendChild(i);
-  document.getElementById('menutop').appendChild(d);
+  return d;
 };
 
 const makeButtonMenuLeft = () => {
@@ -132,6 +133,7 @@ const makeButtonMenuLeft = () => {
 };
 
 export default function createMenu(names, variables, study_zones, territorial_mesh) {
+  const button_tour = makeButtonTour();
   const title_section1 = document.createElement('div');
   title_section1.style.backgroundColor = '#4f81bd';
   title_section1.style.color = 'white';
@@ -297,8 +299,8 @@ export default function createMenu(names, variables, study_zones, territorial_me
 
   // The actual menu containing these 5 sections:
   const menu = document.getElementById('menu');
-  menu.id = 'menu';
   menu.style.float = 'left';
+  menu.appendChild(button_tour);
   menu.appendChild(title_section1);
   menu.appendChild(section1);
   menu.appendChild(title_section4);
@@ -310,5 +312,4 @@ export default function createMenu(names, variables, study_zones, territorial_me
   menu.appendChild(section5);
   handleInputRegioName(names, levels);
   makeButtonMenuLeft();
-  makeButtonTour();
 }
