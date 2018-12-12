@@ -103,7 +103,7 @@ const makeButtonTour = () => {
   const i = document.createElement('img');
   const d = document.createElement('div');
   i.src = 'img/road-sign.png';
-  i.title = 'Visite guidée de l\'applciation';
+  i.title = 'Visite guidée de l\'application';
   i.style.paddingTop = '10px';
   d.id = 'tour_link';
   d.style.cursor = 'pointer';
